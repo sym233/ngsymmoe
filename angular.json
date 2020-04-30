@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "test"
+    }
+  },
+  "defaultProject": "ngsymmoe",
+  "cli": {
+    "analytics": "3179838e-c6fb-4ab1-bbfc-2e9650f974ec"
+  }
 }
