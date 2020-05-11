@@ -1,0 +1,15 @@
+<p>blog-detail works!</p>
+
+<div *ngIf="blogId == 0">
+  <p>blog id error</p>
+</div>
+
+<div *ngIf="blogId">
+  <h3>blog id {{ blogId }}</h3>
+</div>
+
+<a [routerLink]="'..'">
+  <button>
+    back
+  </button>
+</a>

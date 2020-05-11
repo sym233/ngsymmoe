@@ -1,1 +1,5 @@
 <p>blog-main works!</p>
+
+<a *ngFor="let blogId of blogIds" [routerLink]="blogId">
+  <button>to blog {{ blogId }}</button>
+</a>
