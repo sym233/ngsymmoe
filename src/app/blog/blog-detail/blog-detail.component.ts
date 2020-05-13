@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -7,17 +10,37 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./blog-detail.component.less']
 })
 export class BlogDetailComponent implements OnInit {
-  blogId: number;
+  blogId: string;
+  blogContent: string;
+  blogError: string;
+  blogFinished = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-  ) {  }
+    private blogService: BlogService,
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(observer => {
-      this.blogId = Number.parseInt(observer.get('blog-id'), 10) || 0;
+      const blogId = observer.get('blog-id') || '';
+      this.blogId = blogId;
+      if (blogId) {
+        const blog$ = this.blogService.getBlog(this.blogId);
+        blog$.subscribe(
+          blog => {
+            this.blogContent = blog;
+          },
+          err => {
+            this.blogError = JSON.stringify(err);
+          },
+          () => {
+            this.blogFinished = true;
+          }
+        );
+      }
     });
+
   }
 
   backBlogPage() {

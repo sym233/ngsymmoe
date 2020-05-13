@@ -1,11 +1,12 @@
 <p>blog-detail works!</p>
 
-<div *ngIf="blogId == 0">
-  <p>blog id error</p>
-</div>
-
 <div *ngIf="blogId">
-  <h3>blog id {{ blogId }}</h3>
+  <ng-container *ngIf="blogFinished && !blogError">{{blogContent}}</ng-container>
+  <h3 *ngIf="!blogFinished && !blogError">blog loading...</h3>
+  <p *ngIf="blogError">{{blogError}}</p>
+</div>
+<div *ngIf="!blogId">
+  <p>blog id error</p>
 </div>
 
 <a [routerLink]="'..'">
