@@ -1,11 +1,14 @@
-<p>blog-main works!</p>
+<main>
+  <p class="blog-load-hint" *ngIf="!blogIndex" [@blogLoadHint]="'in'">
+    loading blog index
+  </p>
 
-<div *ngFor="let blogItem of blogIndex">
-  <a [routerLink]="[blogItem.url]">
-    <h5>{{ blogItem.name }}</h5>
-    <p>{{ blogItem.abstract }}</p>
-  </a>
-</div>
-<p *ngIf="!blogIndex">
-  loading blog index
-</p>
+  <div *ngIf="blogIndex" [@blogList]="'in'">
+    <div *ngFor="let blogItem of blogIndex">
+      <a [routerLink]="[blogItem.url]">
+        <h5>{{ blogItem.name }}</h5>
+      </a>
+      <p>{{ blogItem.abstract }}</p>
+    </div>
+  </div>
+</main>
